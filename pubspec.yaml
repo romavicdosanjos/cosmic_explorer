@@ -9,15 +9,25 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
+  get_it: ^8.0.3
+  http: ^1.4.0
   yaru: ^8.0.0
+  mobx: ^2.5.0
+  flutter_mobx: ^2.3.0
+  flutter_earth_globe: ^1.0.5
+  flutter_circular_text: ^0.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  mobx_codegen: ^2.7.0
 
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/planets/
