@@ -1,0 +1,39 @@
+name: cosmic-explorer
+adopt-info: cosmic-explorer
+license: GPL-3.0-only
+icon: snap/gui/cosmic-explorer.svg
+title: Cosmic Explorer
+summary: Explore the universe with interactive planetary visualizations
+description: |
+  Cosmic Explorer is a Flutter-based desktop application that allows users to explore
+  detailed information about the planets in the solar system through interactive 3D visualizations.
+
+  Ideal for astronomy enthusiasts, educators, and curious minds, it brings the solar system
+  to life with real-time visuals, planetary data, and a modern UI experience.
+
+source-code: https://github.com/romavicdosanjos/cosmic_explorer
+issues: https://github.com/romavicdosanjos/cosmic_explorer/issues
+
+base: core24
+grade: stable
+confinement: strict
+compression: lzo
+
+platforms:
+  amd64:
+
+apps:
+  cosmic-explorer:
+    command: cosmic_explorer
+    extensions: [gnome]
+    plugs:
+      - network
+
+parts:
+  cosmic-explorer:
+    source: .
+    plugin: flutter
+    build-snaps: [yq]
+    override-pull: |
+      craftctl default
+      craftctl set version="$(yq -r .version pubspec.yaml)"

@@ -1,16 +1,42 @@
-# cosmic_explorer
+# 🌌 Cosmic Explorer
 
-Cosmic Explorer
+**Cosmic Explorer** is a cross-platform Flutter application that allows users to explore planets in the solar system through interactive 3D visualizations.
 
-## Getting Started
+This app brings planetary data to life with engaging visuals, a modern interface, and an educational focus. Ideal for astronomy enthusiasts, students, and curious minds.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🌍 Interactive 3D planetary globe using Flutter Earth Globe
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📸 Preview
+
+### Screenshot
+
+![Cosmic Explorer Screenshot](image1.png)
+
+### Demo Video
+
+https://github.com/romavicdosanjos/cosmic_explorer/video.webm
+
+Or open locally:
+
+<video width="600" controls>
+  <source src="video.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+## 🛠️ Getting Started
+
+Make sure you have [Flutter](https://flutter.dev/docs/get-started/install) installed on your system.
+
+### Clone the repository:
+
+```bash
+git clone https://github.com/romavicdosanjos/cosmic_explorer.git
+cd cosmic_explorer

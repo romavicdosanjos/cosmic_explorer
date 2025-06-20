@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Cosmic Explorer
+GenericName=Cosmic Explorer
+Comment=Cosmic Explorer
+Keywords=cosmic-explorer;cosmic;
+Exec=cosmic_explorer
+Type=Application
+Categories=Utility;
+Icon=${SNAP}/meta/gui/cosmic-explorer.svg
