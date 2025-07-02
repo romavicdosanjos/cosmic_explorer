@@ -1,5 +1,5 @@
 name: cosmic-explorer
-adopt-info: cosmic-explorer
+version: '1.0.0'
 license: GPL-3.0-only
 icon: snap/gui/cosmic-explorer.svg
 title: Cosmic Explorer
@@ -28,12 +28,17 @@ apps:
     extensions: [gnome]
     plugs:
       - network
+    desktop: cosmic-explorer.desktop
 
 parts:
-  cosmic-explorer:
-    source: .
-    plugin: flutter
-    build-snaps: [yq]
-    override-pull: |
-      craftctl default
-      craftctl set version="$(yq -r .version pubspec.yaml)"
+  app-binary:
+    plugin: dump
+    source: build/linux/x64/release/bundle
+    stage:
+      - .
+
+  desktop-entry:
+    plugin: dump
+    source: snap/gui
+    organize:
+      cosmic-explorer.desktop: cosmic-explorer.desktop
