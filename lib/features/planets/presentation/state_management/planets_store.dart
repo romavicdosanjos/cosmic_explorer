@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:cosmic_explorer/features/planets/domain/entity/planets_entity.dart';
 import 'package:cosmic_explorer/features/planets/domain/repository/planets_repository.dart';
 import 'package:mobx/mobx.dart';
@@ -11,7 +10,9 @@ class PlanetsStore = PlanetsStoreBase with _$PlanetsStore;
 abstract class PlanetsStoreBase with Store {
   final PlanetsRepository planetsRepository;
 
-  PlanetsStoreBase({required this.planetsRepository});
+  PlanetsStoreBase({required this.planetsRepository}) {
+    planetsRepository.fetchPlanetsAndAddOnDatabase();
+  }
 
   @observable
   ObservableFuture<List<PlanetsEntity>> planets = ObservableFuture.value([]);

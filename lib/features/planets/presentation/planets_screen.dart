@@ -97,37 +97,105 @@ class _PlanetsScreenState extends State<PlanetsScreen> {
                           ),
                         ),
                       ),
-                      /*      Padding(
+                      Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Align(
                           alignment: Alignment.topRight,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(
-                                "${store.selectedPlanet?.discoveredBy}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                              Text.rich(
+                                TextSpan(
+                                  text: "Discovered by: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          store
+                                                  .selectedPlanet
+                                                  ?.discoveredBy
+                                                  ?.isNotEmpty ==
+                                              true
+                                          ? store.selectedPlanet!.discoveredBy
+                                          : "N/A",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                "${store.selectedPlanet?.density}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                              Text.rich(
+                                TextSpan(
+                                  text: "Discovered Date: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          store
+                                                  .selectedPlanet
+                                                  ?.discoveryDate
+                                                  ?.isNotEmpty ==
+                                              true
+                                          ? store.selectedPlanet!.discoveryDate
+                                          : "N/A",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                "${store.selectedPlanet?.gravity}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                              Text.rich(
+                                TextSpan(
+                                  text: "Density: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          store.selectedPlanet?.density
+                                              ?.toStringAsFixed(2) ??
+                                          "N/A",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  text: "Gravity: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          store.selectedPlanet?.gravity
+                                              ?.toStringAsFixed(2) ??
+                                          "N/A",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),*/
+                      ),
                     ],
                   ),
                 );

@@ -16,6 +16,9 @@ dependencies:
   flutter_mobx: ^2.3.0
   flutter_earth_globe: ^1.0.5
   flutter_circular_text: ^0.3.1
+  drift: ^2.26.1
+  drift_flutter: ^0.2.4
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +27,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.15
   mobx_codegen: ^2.7.0
+  drift_dev: ^2.26.1
 
 flutter:
 

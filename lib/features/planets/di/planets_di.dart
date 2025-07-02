@@ -14,7 +14,10 @@ Future<void> planetsDI() async {
   );
 
   getIt.registerFactory<PlanetsRepository>(
-    () => PlanetsRepositoryImpl(planetsDataSource: getIt.get()),
+    () => PlanetsRepositoryImpl(
+      planetsDataSource: getIt.get(),
+      database: getIt.get(),
+    ),
   );
 
   getIt.registerLazySingleton(

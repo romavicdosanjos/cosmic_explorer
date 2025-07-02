@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   gtk
   screen_retriever_linux
+  sqlite3_flutter_libs
   window_manager
   yaru_window_linux
 )
