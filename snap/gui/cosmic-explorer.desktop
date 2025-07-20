@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Cosmic Explorer
+Comment=Explore the universe with interactive planetary visualizations
+Exec=cosmic_explorer
+Icon=${SNAP}/meta/gui/cosmic-explorer.svg
+Terminal=false
+Type=Application
+Categories=Education;Science;
