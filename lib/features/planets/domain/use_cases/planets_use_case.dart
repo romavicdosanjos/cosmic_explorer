@@ -1,5 +1,5 @@
 import 'package:cosmic_explorer/features/planets/domain/entity/planets_entity.dart';
 
-abstract class PlanetsRepository {
-  Future<List<PlanetsEntity>> planets();
+abstract class PlanetsUseCase {
+  Future<List<PlanetsEntity>> getPlanets();
 }

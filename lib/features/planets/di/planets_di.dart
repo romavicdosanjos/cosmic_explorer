@@ -4,13 +4,13 @@ import 'package:cosmic_explorer/features/planets/data/data_source/planets_data_s
 import 'package:cosmic_explorer/features/planets/data/data_source/planets_data_source_impl.dart';
 import 'package:cosmic_explorer/features/planets/data/repository/planets_repository_impl.dart';
 import 'package:cosmic_explorer/features/planets/domain/repository/planets_repository.dart';
+import 'package:cosmic_explorer/features/planets/domain/use_cases/planets_use_case.dart';
+import 'package:cosmic_explorer/features/planets/domain/use_cases/planets_use_case_impl.dart';
 import 'package:cosmic_explorer/features/planets/presentation/state_management/planets_store.dart';
 
 Future<void> planetsDI() async {
   getIt.registerFactory<PlanetsDataSource>(
-    () => PlanetsDataSourceImpl(
-      api: ApiImpl(baseUrl: 'https://api.le-systeme-solaire.net/'),
-    ),
+    () => PlanetsDataSourceImpl(api: getIt.get()),
   );
 
   getIt.registerFactory<PlanetsRepository>(
@@ -20,7 +20,9 @@ Future<void> planetsDI() async {
     ),
   );
 
-  getIt.registerLazySingleton(
-    () => PlanetsStore(planetsRepository: getIt.get()),
+  getIt.registerFactory<PlanetsUseCase>(
+    () => PlanetsUseCaseImpl(planetsRepository: getIt.get()),
   );
+
+  getIt.registerLazySingleton(() => PlanetsStore(planetsUseCase: getIt.get()));
 }

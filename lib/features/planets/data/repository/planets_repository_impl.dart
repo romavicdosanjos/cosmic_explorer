@@ -1,8 +1,9 @@
 import 'package:cosmic_explorer/core/services/database/database.dart';
 import 'package:cosmic_explorer/features/planets/data/data_source/planets_data_source.dart';
-import 'package:cosmic_explorer/features/planets/domain/entity/planets_companion_helper.dart';
 import 'package:cosmic_explorer/features/planets/domain/entity/planets_entity.dart';
+import 'package:cosmic_explorer/features/planets/domain/mapper/planets_companion_mapper.dart';
 import 'package:cosmic_explorer/features/planets/domain/mapper/planets_mapper.dart';
+import 'package:cosmic_explorer/features/planets/domain/mapper/planets_rows_mapper.dart';
 import 'package:cosmic_explorer/features/planets/domain/repository/planets_repository.dart';
 
 class PlanetsRepositoryImpl implements PlanetsRepository {
@@ -14,7 +15,7 @@ class PlanetsRepositoryImpl implements PlanetsRepository {
     required this.database,
   });
 
-  List<String> planetsList = [
+  final List<String> planetsList = [
     'Uranus',
     'Neptune',
     'Jupiter',
@@ -27,31 +28,28 @@ class PlanetsRepositoryImpl implements PlanetsRepository {
 
   @override
   Future<List<PlanetsEntity>> planets() async {
-    final planetRows = await database.select(database.planets).get();
+    final dataSource = await planetsDataSource.getPlanets();
+    final mappedPlanets = PlanetsMapper().map(dataSource);
 
-    final planetEntities = planetRows.map((row) {
-      return PlanetsCompanionHelper().fromTable(row);
-    }).toList();
-
-    return planetEntities;
-  }
-
-  @override
-  Future<void> fetchPlanetsAndAddOnDatabase() async {
-    var dataSource = await planetsDataSource.getPlanets();
-    var mappedPlanets = PlanetsMapper().map(dataSource) ?? [];
-
-    for (var planet in mappedPlanets) {
-      bool hasEnglishName = planet.englishName != null;
-      bool hasPlanet = planetsList.contains(planet.englishName);
+    for (final planet in mappedPlanets) {
+      final hasEnglishName = planet.englishName != null;
+      final hasPlanet = planetsList.contains(planet.englishName);
 
       if (hasPlanet && hasEnglishName) {
         planet.image =
             'assets/planets/${planet.englishName?.toLowerCase()}.jpg';
       }
 
-      final companion = PlanetsCompanionHelper.fromEntity(planet);
+      final companion = PlanetsCompanionMapper().map(planet);
       await database.into(database.planets).insertOnConflictUpdate(companion);
     }
+
+    final planetRows = await database.select(database.planets).get();
+
+    if (planetRows.isEmpty) {
+      return [];
+    }
+
+    return PlanetsRowsMapper().map(planetRows);
   }
 }

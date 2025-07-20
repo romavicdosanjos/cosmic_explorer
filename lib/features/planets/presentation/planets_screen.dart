@@ -19,17 +19,6 @@ class PlanetsScreen extends StatefulWidget {
 class _PlanetsScreenState extends State<PlanetsScreen> {
   var store = getIt.get<PlanetsStore>();
 
-  List<String> planetsList = [
-    'Uranus',
-    'Neptune',
-    'Jupiter',
-    'Mars',
-    'Mercury',
-    'Saturn',
-    'Earth',
-    'Venus',
-  ];
-
   @override
   void initState() {
     store.fetchPlanets();
@@ -57,7 +46,7 @@ class _PlanetsScreenState extends State<PlanetsScreen> {
                           rotationSpeed: 0.05,
                           isBackgroundFollowingSphereRotation: true,
                           background: Image.asset(
-                            'assets/planets/2k_stars.jpg',
+                            'assets/planets/stars.jpg',
                           ).image,
                           surface: Image.asset(
                             store.selectedPlanet?.image ?? "",
