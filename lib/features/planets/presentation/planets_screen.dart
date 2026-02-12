@@ -1,4 +1,5 @@
-import 'package:cosmic_explorer/di/dependency_injections.dart';
+import
+'package:cosmic_explorer/di/dependency_injections.dart';
 import 'package:cosmic_explorer/features/planets/domain/entity/planets_entity.dart';
 import 'package:cosmic_explorer/features/planets/presentation/state_management/planets_store.dart';
 import 'package:flutter/material.dart';
