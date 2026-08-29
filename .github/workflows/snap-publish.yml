@@ -23,44 +23,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          cache: true
-
-      - name: Install Linux build dependencies
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y \
-            clang cmake ninja-build pkg-config \
-            libgtk-3-dev liblzma-dev libstdc++-12-dev \
-            libglu1-mesa
-
-      - name: Get Flutter dependencies
-        run: flutter pub get
-
-      - name: Build Flutter (release)
-        run: flutter build linux --release
-
-      - name: Install Snapcraft
-        run: sudo snap install snapcraft --classic
-
-      - name: Build Snap package
-        run: snapcraft --destructive-mode
-        env:
-          SNAPCRAFT_BUILD_ENVIRONMENT: host
+      - name: Build Snap
+        uses: snapcore/action-build@v1
+        id: build
 
       - name: Upload Snap artifact
         uses: actions/upload-artifact@v4
         with:
           name: cosmic-explorer-snap
-          path: '*.snap'
+          path: ${{ steps.build.outputs.snap }}
           retention-days: 7
 
-      - name: Publish to Snapcraft (stable)
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      - name: Publish to Snapcraft
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+        uses: snapcore/action-publish@v1
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
-        run: |
-          snapcraft upload *.snap --release=stable
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          release: stable
