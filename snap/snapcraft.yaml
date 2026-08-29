@@ -31,9 +31,38 @@ apps:
     desktop: cosmic-explorer.desktop
 
 parts:
-  app-binary:
-    plugin: dump
-    source: build/linux/x64/release/bundle
+  flutter-build:
+    plugin: nil
+    source: .
+    build-packages:
+      - curl
+      - git
+      - unzip
+      - xz-utils
+      - zip
+      - libglu1-mesa
+      - clang
+      - cmake
+      - ninja-build
+      - pkg-config
+      - libgtk-3-dev
+      - liblzma-dev
+      - libstdc++-12-dev
+    override-build: |
+      # Install Flutter
+      export FLUTTER_HOME="$HOME/flutter"
+      if [ ! -d "$FLUTTER_HOME" ]; then
+        git clone https://github.com/flutter/flutter.git -b stable "$FLUTTER_HOME" --depth 1
+      fi
+      export PATH="$PATH:$FLUTTER_HOME/bin"
+
+      # Build the app
+      flutter config --no-analytics
+      flutter pub get
+      flutter build linux --release
+
+      # Copy artifacts
+      cp -r build/linux/x64/release/bundle/. "$SNAPCRAFT_PART_INSTALL/"
     stage:
       - .
 
