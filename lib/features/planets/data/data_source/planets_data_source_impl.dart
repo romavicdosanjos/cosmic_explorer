@@ -14,8 +14,7 @@ class PlanetsDataSourceImpl implements PlanetsDataSource {
     final response = await api.getEndpoint(
       'rest/bodies?filter[]=isPlanet,eq,true',
       headers: {
-        'Authorization':
-            'Bearer add here your key generated https://api.le-systeme-solaire.net/generatekey.html',
+        'Authorization': 'Bearer 8bdfd8ed-0a33-4e25-b054-a4843a7c8594',
       },
     );
     return PlanetsResponse.fromJson(jsonDecode(response.body));

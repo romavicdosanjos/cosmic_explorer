@@ -1,5 +1,5 @@
 name: cosmic-explorer
-version: '1.0.0'
+version: '1.0.1'
 license: GPL-3.0-only
 icon: snap/gui/cosmic-explorer.svg
 title: Cosmic Explorer
